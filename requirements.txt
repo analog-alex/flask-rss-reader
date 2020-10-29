@@ -1,0 +1,4 @@
+
+Flask==1.1.2
+feedparser==6.0.1
+elasticsearch==7.9.1
