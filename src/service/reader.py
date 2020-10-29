@@ -1,6 +1,8 @@
 import feedparser
+from flask import Response
 
 from src.repository.elasticsearch import put_in
+from src.service import countries, feeds
 
 
 def read_from_feed(url):
@@ -29,14 +31,14 @@ def fetch_all_feeds_by_country(country_code):
 
     # read all feeds and aggregate them on a single list
     all_news = []
-    for news in country_feeds.feeds:
+    for news in country_feeds['feeds']:
         all_news.append({
             'name': news.name,
             'entries': read_from_feed(news.url).entries
         })
 
     return {
-        'country': country_feeds.country,
+        'country': country_feeds['country'],
         'feeds': all_news
     }
 
@@ -44,7 +46,7 @@ def fetch_all_feeds_by_country(country_code):
 def ingest_all_feeds_for_country(country_code):
     country_all_feeds = fetch_all_feeds_by_country(country_code)
 
-    for news in country_all_feeds.feeds:
+    for news in country_all_feeds['feeds']:
         put_in('feeds', country_code, news)
 
     return {

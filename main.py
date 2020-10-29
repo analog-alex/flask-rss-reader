@@ -1,6 +1,6 @@
 from flask import Flask
-from src.controllers.IndexController import index_controller
-from src.controllers.FeedsController import feeder_controller
+from src.controllers.index_controller import index_controller
+from src.controllers.feeds_controller import feeder_controller
 from src.repository.elasticsearch import ping
 
 
