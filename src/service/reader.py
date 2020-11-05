@@ -27,18 +27,25 @@ def find_sources_by_country(country_code):
 
 
 def fetch_all_feeds_by_country(country_code):
-    country_feeds = find_sources_by_country(country_code)
+    # find country and return 404 if no match
+    find = [country for country in countries if country.code == country_code]
+    if len(find) == 0:
+        return Response(status=404)
+    country = find[0]
+
+    # get the name of all feeds found for that country
+    country_feeds = feeds.get(country.code)
 
     # read all feeds and aggregate them on a single list
     all_news = []
-    for news in country_feeds['feeds']:
+    for news in country_feeds:
         all_news.append({
             'name': news.name,
             'entries': read_from_feed(news.url).entries
         })
 
     return {
-        'country': country_feeds['country'],
+        'country': country,
         'feeds': all_news
     }
 
