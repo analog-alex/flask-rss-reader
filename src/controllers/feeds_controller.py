@@ -49,7 +49,7 @@ def get_feeds_by_country(country_code):
 @feeder_controller.route('/feed/countries/<country_code>/feeds', methods=['PUT'])
 def inject_feeds_by_country(country_code):
     response = ingest_all_feeds_for_country(country_code)
-    response['at'] = datetime.now()
+    response['at'] = datetime.now().__str__()
 
     return Response(
         response=json.dumps(response, default=lambda o: o.__dict__, sort_keys=False, indent=4),
