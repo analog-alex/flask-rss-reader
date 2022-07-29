@@ -6,6 +6,8 @@ A micro Flask app (Python) to read RSS feeds into Elasticsearch `@2020`
 | ------------- |:-------------:| 
 
 
+**Travis CI is no longer in use**
+
 ## What is it?
 
 A **Python** (3.7) application built using **Flask** that can read a predefined list of RSS feeds, curated by country, and ingest 
